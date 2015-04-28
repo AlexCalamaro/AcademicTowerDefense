@@ -1,0 +1,32 @@
+package code;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+public class OptionMenu extends JPanel {
+
+	
+	public OptionMenu()
+	{
+		
+		this.setBackground(Color.WHITE);
+		this.setPreferredSize(new Dimension(250, 200));
+		this.setLayout(new FlowLayout(0,0,75));
+		
+		PausePlayButton pauseButton = new PausePlayButton();
+		this.add(pauseButton);
+		
+		JButton startLevelButton = new JButton(new ImageIcon("StartLevelButton.png"));
+		startLevelButton.setBackground(Color.WHITE);
+		startLevelButton.setPreferredSize(new Dimension(181,50));
+		this.add(startLevelButton);
+	}
+
+}

@@ -1,0 +1,29 @@
+package code;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.JPanel;;
+
+public class TowerMenu extends JPanel {
+	
+	Image background;
+	public TowerMenu()
+	{
+		background = TowerDefenseGUI.loadImage("StickyNote4.jpg", 250, 200);
+		this.setPreferredSize(new Dimension(250, 200));
+	}
+	
+	public void paint(Graphics g)
+	{
+		g.drawImage(background, 0, 0, null);
+				
+		g.drawString("Because we will need the backend,\n", 20, 20);
+		g.drawString("this is not implemented. \n", 20, 40);
+		g.drawString("Eventually, this will", 20, 60);
+		g.drawString("display available towers", 20, 80);
+	}
+
+}

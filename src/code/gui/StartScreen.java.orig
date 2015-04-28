@@ -1,0 +1,104 @@
+package code.gui;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+/**
+ * StartScreen provides a simple welcome-frontend for the user with an easy-to-use
+ * interface.
+ * @author Alex Calamaro, Andrew Elenbogen, Aidan Carroll, Jerry Wei
+ */
+public class StartScreen extends JPanel 
+{
+	private static Image background;
+	private TowerDefenseGUI frame;
+	
+	
+	/**
+	 * Constructor for StartScreen. Creates the buttons, aligns them, sets their default values,
+	 * and adds their action listeners.
+	 * 
+	 * @param myFrame the frame in which this JPanel element exists
+	 */
+	public StartScreen(final TowerDefenseGUI myFrame)
+	{
+		this.frame=myFrame;
+		this.setPreferredSize(new Dimension(800, 800));
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		JButton loadGame = new JButton("Load Game");
+		JButton instructions=new JButton("Instructions");
+		JButton credits= new JButton("Credits");
+		
+		ImageIcon loadIcon = new ImageIcon(TowerDefenseGUI.loadImage("LoadGame.jpg",200,50));
+		ImageIcon instructionIcon = new ImageIcon(TowerDefenseGUI.loadImage("Instructions.JPG",220,50));
+		ImageIcon creditsIcon = new ImageIcon(TowerDefenseGUI.loadImage("Credits.JPG",140,50));
+		
+		Dimension d1 = new Dimension(200,50);
+		Dimension d2 = new Dimension(220,50);
+		Dimension d3 = new Dimension(130,50);
+		
+		loadGame.setIcon(loadIcon);
+		loadGame.setMaximumSize(d1);
+		loadGame.setBackground(Color.WHITE);
+		loadGame.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		instructions.setIcon(instructionIcon);
+		instructions.setMaximumSize(d2);
+		instructions.setBackground(Color.WHITE);
+		instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		credits.setIcon(creditsIcon);
+		credits.setMaximumSize(d3);
+		credits.setBackground(Color.WHITE);
+		credits.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		this.add(Box.createRigidArea(new Dimension(800,200)));
+		this.add(loadGame);
+		this.add(instructions);
+		this.add(credits);
+		
+
+		
+		background=TowerDefenseGUI.loadImage("LinedPaper.jpg", 800, 800);
+		
+		loadGame.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				myFrame.switchToScreen(new GameScreen());
+				
+			}
+		});
+		
+		instructions.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				myFrame.switchToScreen(new InstructionsScreen(new StartScreen(frame), myFrame));
+			}
+		});
+	
+		this.add(loadGame);
+		this.add(instructions);
+		this.add(credits);
+	}
+	
+	public void paintComponent(Graphics g)
+	{
+		g.drawImage(background, 0, 0, null);
+		
+	}
+
+}
